@@ -1,4 +1,4 @@
 # RGVS
 RGVS Single Precision
 
-I'm Lazy
+I'm a lazy ass, so no readme kinda crap
