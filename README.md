@@ -1,4 +1,4 @@
 # RGVS
-RGVS Single Precison
+RGVS Single Precision
 
-LOL
+I'm Lazy
