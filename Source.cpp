@@ -94,12 +94,12 @@ public:
 		rg(float c, float a1, float a2, float a3, float a4, float a5, float a6, float a7, float a8) {
 		AvsFilterRemoveGrain16_SORT_AXIS_CPP
 
-	    const float      c1 = std::abs(c - limit(c, mi1, ma1));
+	        const float      c1 = std::abs(c - limit(c, mi1, ma1));
 		const float      c2 = std::abs(c - limit(c, mi2, ma2));
 		const float      c3 = std::abs(c - limit(c, mi3, ma3));
 		const float      c4 = std::abs(c - limit(c, mi4, ma4));
 
-		const int      mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
+		const float      mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
 
 		if (mindiff == c4) {
 			return (limit(c, mi4, ma4));
