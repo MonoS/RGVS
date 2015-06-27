@@ -80,8 +80,41 @@ struct PlaneProc {
 struct PlaneProcFB {
     template<typename T>
     static void clenseProcessPlane(T* VS_RESTRICT pDst, const T* VS_RESTRICT pSrc, const T* VS_RESTRICT pRef1, const T* VS_RESTRICT pRef2, int stride, int width, int height) {
+
+        __m256 Two = _mm256_set1_ps(2.0f);
+        __m256 minLim = _mm256_set1_ps(std::numeric_limits<float>::min());
+        __m256 maxLim = _mm256_set1_ps(std::numeric_limits<float>::max());
+
         for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x) {
+            int x;
+
+
+            for(x = 0; x < (width / 8);  x = x + 8)
+            {
+                __m256 pSrc_8 = _mm256_load_ps(pSrc + x);
+                __m256 pRef1_8 = _mm256_load_ps(pRef1 + x);
+                __m256 pRef2_8 = _mm256_load_ps(pRef2 + x);
+
+                __m256 minref = _mm256_min_ps(pRef1_8, pRef2_8);
+                __m256 maxref = _mm256_max_ps(pRef1_8, pRef2_8);
+
+                __m256 lowref = _mm256_mul_ps(Two, minref);
+                lowref = _mm256_sub_ps(lowref, pRef2_8);
+
+                __m256 upref = _mm256_mul_ps(Two, maxref);
+                upref = _mm256_sub_ps(upref, pRef2_8);
+
+                __m256 value = pSrc_8;
+                __m256 lower = _mm256_max_ps(lowref, minLim);
+                __m256 upper = _mm256_max_ps(upref, maxLim);
+
+                value = _mm256_min_ps(upper, _mm256_max_ps(lower, value));
+
+                _mm256_store_ps(pDst + x, value);
+
+            }
+
+            for (; x < width; ++x) {
                 T minref = std::min(pRef1[x], pRef2[x]);
                 T maxref = std::max(pRef1[x], pRef2[x]);
                 float lowref = minref * 2 - pRef2[x];
