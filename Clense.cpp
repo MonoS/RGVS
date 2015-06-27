@@ -30,9 +30,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define CLENSE_RETERROR(x) do { vsapi->setError(out, (x)); vsapi->freeNode(d.cnode); vsapi->freeNode(d.pnode); vsapi->freeNode(d.nnode); return; } while (0)
 #define CLAMP(value, lower, upper) do { if (value < lower) value = lower; else if (value > upper) value = upper; } while(0)
 
-#include <emmintrin.h>
-#include <immintrin.h>
-
 typedef struct {
     VSNodeRef *cnode;
     VSNodeRef *pnode;

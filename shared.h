@@ -22,6 +22,8 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 #include <stdint.h>
 #include <algorithm>
 #include <cstdlib>
+#include <emmintrin.h>
+#include <immintrin.h>
 
 #if defined(_MSC_VER)
 #define _ALLOW_KEYWORD_MACROS
