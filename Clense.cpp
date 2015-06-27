@@ -30,6 +30,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define CLENSE_RETERROR(x) do { vsapi->setError(out, (x)); vsapi->freeNode(d.cnode); vsapi->freeNode(d.pnode); vsapi->freeNode(d.nnode); return; } while (0)
 #define CLAMP(value, lower, upper) do { if (value < lower) value = lower; else if (value > upper) value = upper; } while(0)
 
+#include <emmintrin.h>
+#include <immintrin.h>
+
 typedef struct {
     VSNodeRef *cnode;
     VSNodeRef *pnode;
@@ -49,8 +52,23 @@ struct PlaneProc {
     template<typename T>
     static void clenseProcessPlane(T* VS_RESTRICT pDst, const T* VS_RESTRICT pSrc, const T* VS_RESTRICT pRef1, const T* VS_RESTRICT pRef2, int stride, int width, int height) {
         for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x)
+            int x;
+            for (x = 0; x < (width / 8); x = x+8)
+            {
+                __m256 pSrc_8 = _mm256_load_ps(pSrc + x);
+                __m256 pRef1_8 = _mm256_load_ps(pRef1 + x);
+                __m256 pRef2_8 = _mm256_load_ps(pRef2 + x);
+
+                __m256 dest = _mm256_min_ps(_mm256_max_ps(pSrc_8, _mm256_min_ps(pRef1_8, pRef2_8)), _mm256_max_ps(pRef1_8, pRef2_8));
+
+                _mm256_store_ps((pDst + x), dest);
+            }
+
+            for(; x < width; ++x)
+            {
                 pDst[x] = std::min(std::max(pSrc[x], std::min(pRef1[x], pRef2[x])), std::max(pRef1[x], pRef2[x]));
+            }
+
             pDst += stride;
             pSrc += stride;
             pRef1 += stride;
@@ -204,7 +222,7 @@ void VS_CC clenseCreate(const VSMap *in, VSMap *out, void *userData, VSCore *cor
     for (i = 0; i < m; i++) {
         o = int64ToIntS(vsapi->propGetInt(in, "planes", i, nullptr));
 
-        if (o < 0 || o >= n) 
+        if (o < 0 || o >= n)
             CLENSE_RETERROR("Clense: plane index out of range");
 
         if (d.process[o])
@@ -220,7 +238,7 @@ void VS_CC clenseCreate(const VSMap *in, VSMap *out, void *userData, VSCore *cor
       else {
           getFrameFunc = clenseGetFrame<float, PlaneProcFB>;
           }
-        
+
     data = new ClenseData(d);
 
     vsapi->createFilter(in, out, "Clense", clenseInit, getFrameFunc, clenseFree, fmParallel, 0, data, core);
