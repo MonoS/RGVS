@@ -60,6 +60,11 @@ public:
 
 		return (limit(cr, mi, ma));
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG02
@@ -72,6 +77,11 @@ public:
 		std::sort(&a[0], (&a[8]) + 1);
 
 		return (limit(cr, a[2 - 1], a[7]));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -86,6 +96,11 @@ public:
 
 		return (limit(cr, a[3 - 1], a[6]));
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG04
@@ -98,6 +113,11 @@ public:
 		std::sort(&a[0], (&a[8]) + 1);
 
 		return (limit(cr, a[4 - 1], a[5]));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -138,6 +158,11 @@ public:
 			return clipped3;
 		else
 			return clipped1;
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -184,6 +209,11 @@ public:
 		else
 			return clipped1;
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG07
@@ -228,6 +258,11 @@ public:
 			return clipped3;
 		else
 			return clipped1;
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -274,6 +309,11 @@ public:
 		else
 			return clipped1;
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG09
@@ -308,6 +348,11 @@ public:
 			return limit(cr, mil3, mal3);
 		else
 			return limit(cr, mil1, mal1);
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -347,6 +392,11 @@ public:
 		else
 			return a4;
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG12
@@ -361,6 +411,11 @@ public:
 		const float        ma = std::max(a[7 - 1], c);
 
 		return (limit(cr, mi, ma));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -377,6 +432,11 @@ public:
 
 		return (limit(cr, mi, ma));
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG14
@@ -391,6 +451,11 @@ public:
 		const float        ma = std::max(a[5 - 1], c);
 
 		return (limit(cr, mi, ma));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -430,6 +495,11 @@ public:
 		ma = std::max(ma, c);
 
 		return (limit(cr, mi, ma));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -475,6 +545,11 @@ public:
 
 		return (limit(cr, mi, ma));
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG17 {
@@ -490,6 +565,11 @@ public:
 		const float      ma = std::max(std::max(l, u), c);
 
 		return (limit(cr, mi, ma));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -528,6 +608,11 @@ public:
 
 		return (limit(cr, mi, ma));
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG19 {
@@ -546,6 +631,11 @@ public:
 		const float mindiff = std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8)));
 
 		return limit(cr, limit(c - mindiff, (float)0.0, (float)1.0), limit(c + mindiff, (float)0.0, (float)1.0));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -584,6 +674,11 @@ public:
 
 		return limit(cr, limit(c - maxdiff, (float)0.0, (float)1.0), limit(c + maxdiff, (float)0.0, (float)1.0));
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG21 {
@@ -611,6 +706,11 @@ public:
 
 		return limit(cr, limit(c - u, (float)0.0, (float)1.0), limit(c + u, (float)0.0, (float)1.0));
 	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
+	}
 };
 
 class OpRG22 {
@@ -629,6 +729,11 @@ public:
 		const float mindiff = std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8)));
 
 		return limit(c, limit(cr - mindiff, (float)0.0, (float)1.0), limit(cr + mindiff, (float)0.0, (float)1.0));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -666,6 +771,11 @@ public:
 		maxdiff = limit(maxdiff, mindiff, d8);
 
 		return limit(c, limit(cr - maxdiff, (float)0.0, (float)1.0), limit(cr + maxdiff, (float)0.0, (float)1.0));
+	}
+
+	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
+	    __m256 a;
+	    return a;
 	}
 };
 
@@ -929,7 +1039,7 @@ void VS_CC repairCreate(const VSMap *in, VSMap *out, void *userData, VSCore *cor
         vsapi->setError(out, "Repair: Input clips must have the same format");
         return;
     }
-    
+
     int n = d.vi->format->numPlanes;
     int m = vsapi->propNumElements(in, "mode");
     if (n < m) {
