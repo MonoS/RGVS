@@ -36,7 +36,7 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 #define ALIGNED_ARRAY(decl, alignment) __attribute__((aligned(16))) decl
 #endif
 
-static __forceinline __m256 clamp_8(__m256 lower,__m256 value, __m256 upper)
+static __forceinline __m256 clamp_8(__m256 value, __m256 lower, __m256 upper)
 {
     return _mm256_min_ps(upper, _mm256_max_ps(lower, value));
 }
