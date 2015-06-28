@@ -34,6 +34,16 @@ class ConvUnsigned
     const float      ma4 = std::max(a4, a5);   \
     const float      mi4 = std::min(a4, a5);
 
+#define AvsFilterRepair16_SORT_AXIS_AVX \
+    __m256 const     ma1 = _mm256_max_ps(a1, a8);   \
+    __m256 const     mi1 = _mm256_min_ps(a1, a8);   \
+    __m256 const     ma2 = _mm256_max_ps(a2, a7);   \
+    __m256 const     mi2 = _mm256_min_ps(a2, a7);   \
+    __m256 const     ma3 = _mm256_max_ps(a3, a6);   \
+    __m256 const     mi3 = _mm256_min_ps(a3, a6);   \
+    __m256 const     ma4 = _mm256_max_ps(a4, a5);   \
+    __m256 const     mi4 = _mm256_min_ps(a4, a5);
+
 class OpRG01
 {
 public:
