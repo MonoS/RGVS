@@ -740,8 +740,30 @@ static void process_row_cpp (T *dst_ptr, const T *src1_ptr, const T *src2_ptr, i
 
     src1_ptr += x_beg;
     src2_ptr += x_beg;
+    int x_end8 = (x_end & ~7);
+    int x;
 
-    for (int x = x_beg; x < x_end; ++x)
+    for(x = x_beg; x < x_end8; x += 8)
+    {
+        __m256 const       cr = _mm256_load_ps(src1_ptr + 0 );
+        __m256 const       a1 = _mm256_load_ps(src2_ptr - op);
+        __m256 const       a2 = _mm256_load_ps(src2_ptr - o0);
+        __m256 const       a3 = _mm256_load_ps(src2_ptr - om);
+        __m256 const       a4 = _mm256_load_ps(src2_ptr - 1 );
+        __m256 const       c  = _mm256_load_ps(src2_ptr + 0 );
+        __m256 const       a5 = _mm256_load_ps(src2_ptr + 1 );
+        __m256 const       a6 = _mm256_load_ps(src2_ptr + om);
+        __m256 const       a7 = _mm256_load_ps(src2_ptr + o0);
+        __m256 const       a8 = _mm256_load_ps(src2_ptr + op);
+
+        __m256 const       res = OP::rg_8(cr, a1, a2, a3, a4, c, a5, a6, a7, a8);
+
+        dst_ptr [x] = res;
+
+        ++ src1_ptr;
+        ++ src2_ptr;
+    }
+    for (; x < x_end; ++x)
     {
         const float        cr = src1_ptr [0];
         const float        a1 = src2_ptr [-op];
