@@ -784,10 +784,10 @@ static void process_row_cpp (T *dst_ptr, const T *src1_ptr, const T *src2_ptr, i
 
         __m256 const       res = OP::rg_8(cr, a1, a2, a3, a4, c, a5, a6, a7, a8);
 
-        dst_ptr [x] = res;
+        _mm256_store_ps(dst_ptr +x, res);
 
-        ++ src1_ptr;
-        ++ src2_ptr;
+        src1_ptr += 8;
+        src2_ptr += 8;
     }
     for (; x < x_end; ++x)
     {
