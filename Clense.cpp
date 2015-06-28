@@ -105,7 +105,7 @@ struct PlaneProcFB {
                 __m256 lower = _mm256_max_ps(lowref, minLim);
                 __m256 upper = _mm256_max_ps(upref, maxLim);
 
-                value = _mm256_min_ps(upper, _mm256_max_ps(lower, value));
+                value = clamp_8(lower, value, upper)
 
                 _mm256_store_ps(pDst + x, value);
 
