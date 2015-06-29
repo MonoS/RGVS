@@ -25,14 +25,14 @@ class ConvUnsigned
 };
 
 #define AvsFilterRepair16_SORT_AXIS_CPP \
-    const float      ma1 = std::max(a1, a8);   \
-    const float      mi1 = std::min(a1, a8);   \
-    const float      ma2 = std::max(a2, a7);   \
-    const float      mi2 = std::min(a2, a7);   \
-    const float      ma3 = std::max(a3, a6);   \
-    const float      mi3 = std::min(a3, a6);   \
-    const float      ma4 = std::max(a4, a5);   \
-    const float      mi4 = std::min(a4, a5);
+    float const      ma1 = std::max(a1, a8);   \
+    float const      mi1 = std::min(a1, a8);   \
+    float const      ma2 = std::max(a2, a7);   \
+    float const      mi2 = std::min(a2, a7);   \
+    float const      ma3 = std::max(a3, a6);   \
+    float const      mi3 = std::min(a3, a6);   \
+    float const      ma4 = std::max(a4, a5);   \
+    float const      mi4 = std::min(a4, a5);
 
 #define AvsFilterRepair16_SORT_AXIS_AVX \
     __m256 const     ma1 = _mm256_max_ps(a1, a8);   \
@@ -49,11 +49,11 @@ class OpRG01
 public:
 	typedef    ConvSigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float        mi = std::min(std::min(
+		float const        mi = std::min(std::min(
 			std::min(std::min(a1, a2), std::min(a3, a4)),
 			std::min(std::min(a5, a6), std::min(a7, a8))
 			), c);
-		const float        ma = std::max(std::max(
+		float const        ma = std::max(std::max(
 			std::max(std::max(a1, a2), std::max(a3, a4)),
 			std::max(std::max(a5, a6), std::max(a7, a8))
 			), c);
@@ -126,29 +126,29 @@ class OpRG05
 public:
 	typedef    ConvSigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float mal1 = std::max(std::max(a1, a8), c);
-		const float mil1 = std::min(std::min(a1, a8), c);
+		float const mal1 = std::max(std::max(a1, a8), c);
+		float const mil1 = std::min(std::min(a1, a8), c);
 
-		const float mal2 = std::max(std::max(a2, a7), c);
-		const float mil2 = std::min(std::min(a2, a7), c);
+		float const mal2 = std::max(std::max(a2, a7), c);
+		float const mil2 = std::min(std::min(a2, a7), c);
 
-		const float mal3 = std::max(std::max(a3, a6), c);
-		const float mil3 = std::min(std::min(a3, a6), c);
+		float const mal3 = std::max(std::max(a3, a6), c);
+		float const mil3 = std::min(std::min(a3, a6), c);
 
-		const float mal4 = std::max(std::max(a4, a5), c);
-		const float mil4 = std::min(std::min(a4, a5), c);
+		float const mal4 = std::max(std::max(a4, a5), c);
+		float const mil4 = std::min(std::min(a4, a5), c);
 
-		const float clipped1 = limit(cr, mil1, mal1);
-		const float clipped2 = limit(cr, mil2, mal2);
-		const float clipped3 = limit(cr, mil3, mal3);
-		const float clipped4 = limit(cr, mil4, mal4);
+		float const clipped1 = limit(cr, mil1, mal1);
+		float const clipped2 = limit(cr, mil2, mal2);
+		float const clipped3 = limit(cr, mil3, mal3);
+		float const clipped4 = limit(cr, mil4, mal4);
 
-		const float c1 = std::abs(cr - clipped1);
-		const float c2 = std::abs(cr - clipped2);
-		const float c3 = std::abs(cr - clipped3);
-		const float c4 = std::abs(cr - clipped4);
+		float const c1 = std::abs(cr - clipped1);
+		float const c2 = std::abs(cr - clipped2);
+		float const c3 = std::abs(cr - clipped3);
+		float const c4 = std::abs(cr - clipped4);
 
-		const float mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
+		float const mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
 
 		if (mindiff == c4)
 			return clipped4;
@@ -171,34 +171,34 @@ class OpRG06
 public:
 	typedef    ConvSigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float mal1 = std::max(std::max(a1, a8), c);
-		const float mil1 = std::min(std::min(a1, a8), c);
+		float const mal1 = std::max(std::max(a1, a8), c);
+		float const mil1 = std::min(std::min(a1, a8), c);
 
-		const float mal2 = std::max(std::max(a2, a7), c);
-		const float mil2 = std::min(std::min(a2, a7), c);
+		float const mal2 = std::max(std::max(a2, a7), c);
+		float const mil2 = std::min(std::min(a2, a7), c);
 
-		const float mal3 = std::max(std::max(a3, a6), c);
-		const float mil3 = std::min(std::min(a3, a6), c);
+		float const mal3 = std::max(std::max(a3, a6), c);
+		float const mil3 = std::min(std::min(a3, a6), c);
 
-		const float mal4 = std::max(std::max(a4, a5), c);
-		const float mil4 = std::min(std::min(a4, a5), c);
+		float const mal4 = std::max(std::max(a4, a5), c);
+		float const mil4 = std::min(std::min(a4, a5), c);
 
-		const float d1 = mal1 - mil1;
-		const float d2 = mal2 - mil2;
-		const float d3 = mal3 - mil3;
-		const float d4 = mal4 - mil4;
+		float const d1 = mal1 - mil1;
+		float const d2 = mal2 - mil2;
+		float const d3 = mal3 - mil3;
+		float const d4 = mal4 - mil4;
 
-		const float clipped1 = limit(cr, mil1, mal1);
-		const float clipped2 = limit(cr, mil2, mal2);
-		const float clipped3 = limit(cr, mil3, mal3);
-		const float clipped4 = limit(cr, mil4, mal4);
+		float const clipped1 = limit(cr, mil1, mal1);
+		float const clipped2 = limit(cr, mil2, mal2);
+		float const clipped3 = limit(cr, mil3, mal3);
+		float const clipped4 = limit(cr, mil4, mal4);
 
-		const float c1 = limit((std::abs(cr - clipped1) * 2) + d1, (float)0.0, (float)1.0);
-		const float c2 = limit((std::abs(cr - clipped2) * 2) + d2, (float)0.0, (float)1.0);
-		const float c3 = limit((std::abs(cr - clipped3) * 2) + d3, (float)0.0, (float)1.0);
-		const float c4 = limit((std::abs(cr - clipped4) * 2) + d4, (float)0.0, (float)1.0);
+		float const c1 = limit((std::abs(cr - clipped1) * 2) + d1, (float)0.0, (float)1.0);
+		float const c2 = limit((std::abs(cr - clipped2) * 2) + d2, (float)0.0, (float)1.0);
+		float const c3 = limit((std::abs(cr - clipped3) * 2) + d3, (float)0.0, (float)1.0);
+		float const c4 = limit((std::abs(cr - clipped4) * 2) + d4, (float)0.0, (float)1.0);
 
-		const float mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
+		float const mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
 
 		if (mindiff == c4)
 			return clipped4;
@@ -221,34 +221,34 @@ class OpRG07
 public:
 	typedef    ConvSigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float mal1 = std::max(std::max(a1, a8), c);
-		const float mil1 = std::min(std::min(a1, a8), c);
+		float const mal1 = std::max(std::max(a1, a8), c);
+		float const mil1 = std::min(std::min(a1, a8), c);
 
-		const float mal2 = std::max(std::max(a2, a7), c);
-		const float mil2 = std::min(std::min(a2, a7), c);
+		float const mal2 = std::max(std::max(a2, a7), c);
+		float const mil2 = std::min(std::min(a2, a7), c);
 
-		const float mal3 = std::max(std::max(a3, a6), c);
-		const float mil3 = std::min(std::min(a3, a6), c);
+		float const mal3 = std::max(std::max(a3, a6), c);
+		float const mil3 = std::min(std::min(a3, a6), c);
 
-		const float mal4 = std::max(std::max(a4, a5), c);
-		const float mil4 = std::min(std::min(a4, a5), c);
+		float const mal4 = std::max(std::max(a4, a5), c);
+		float const mil4 = std::min(std::min(a4, a5), c);
 
-		const float d1 = mal1 - mil1;
-		const float d2 = mal2 - mil2;
-		const float d3 = mal3 - mil3;
-		const float d4 = mal4 - mil4;
+		float const d1 = mal1 - mil1;
+		float const d2 = mal2 - mil2;
+		float const d3 = mal3 - mil3;
+		float const d4 = mal4 - mil4;
 
-		const float clipped1 = limit(cr, mil1, mal1);
-		const float clipped2 = limit(cr, mil2, mal2);
-		const float clipped3 = limit(cr, mil3, mal3);
-		const float clipped4 = limit(cr, mil4, mal4);
+		float const clipped1 = limit(cr, mil1, mal1);
+		float const clipped2 = limit(cr, mil2, mal2);
+		float const clipped3 = limit(cr, mil3, mal3);
+		float const clipped4 = limit(cr, mil4, mal4);
 
-		const float c1 = std::abs(cr - clipped1) + d1;
-		const float c2 = std::abs(cr - clipped2) + d2;
-		const float c3 = std::abs(cr - clipped3) + d3;
-		const float c4 = std::abs(cr - clipped4) + d4;
+		float const c1 = std::abs(cr - clipped1) + d1;
+		float const c2 = std::abs(cr - clipped2) + d2;
+		float const c3 = std::abs(cr - clipped3) + d3;
+		float const c4 = std::abs(cr - clipped4) + d4;
 
-		const float mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
+		float const mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
 
 		if (mindiff == c4)
 			return clipped4;
@@ -271,34 +271,34 @@ class OpRG08
 public:
 	typedef    ConvSigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float mal1 = std::max(std::max(a1, a8), c);
-		const float mil1 = std::min(std::min(a1, a8), c);
+		float const mal1 = std::max(std::max(a1, a8), c);
+		float const mil1 = std::min(std::min(a1, a8), c);
 
-		const float mal2 = std::max(std::max(a2, a7), c);
-		const float mil2 = std::min(std::min(a2, a7), c);
+		float const mal2 = std::max(std::max(a2, a7), c);
+		float const mil2 = std::min(std::min(a2, a7), c);
 
-		const float mal3 = std::max(std::max(a3, a6), c);
-		const float mil3 = std::min(std::min(a3, a6), c);
+		float const mal3 = std::max(std::max(a3, a6), c);
+		float const mil3 = std::min(std::min(a3, a6), c);
 
-		const float mal4 = std::max(std::max(a4, a5), c);
-		const float mil4 = std::min(std::min(a4, a5), c);
+		float const mal4 = std::max(std::max(a4, a5), c);
+		float const mil4 = std::min(std::min(a4, a5), c);
 
-		const float d1 = mal1 - mil1;
-		const float d2 = mal2 - mil2;
-		const float d3 = mal3 - mil3;
-		const float d4 = mal4 - mil4;
+		float const d1 = mal1 - mil1;
+		float const d2 = mal2 - mil2;
+		float const d3 = mal3 - mil3;
+		float const d4 = mal4 - mil4;
 
-		const float clipped1 = limit(cr, mil1, mal1);
-		const float clipped2 = limit(cr, mil2, mal2);
-		const float clipped3 = limit(cr, mil3, mal3);
-		const float clipped4 = limit(cr, mil4, mal4);
+		float const clipped1 = limit(cr, mil1, mal1);
+		float const clipped2 = limit(cr, mil2, mal2);
+		float const clipped3 = limit(cr, mil3, mal3);
+		float const clipped4 = limit(cr, mil4, mal4);
 
-		const float c1 = limit(std::abs(cr - clipped1) + (d1 * 2), (float)0.0, (float)1.0);
-		const float c2 = limit(std::abs(cr - clipped2) + (d2 * 2), (float)0.0, (float)1.0);
-		const float c3 = limit(std::abs(cr - clipped3) + (d3 * 2), (float)0.0, (float)1.0);
-		const float c4 = limit(std::abs(cr - clipped4) + (d4 * 2), (float)0.0, (float)1.0);
+		float const c1 = limit(std::abs(cr - clipped1) + (d1 * 2), (float)0.0, (float)1.0);
+		float const c2 = limit(std::abs(cr - clipped2) + (d2 * 2), (float)0.0, (float)1.0);
+		float const c3 = limit(std::abs(cr - clipped3) + (d3 * 2), (float)0.0, (float)1.0);
+		float const c4 = limit(std::abs(cr - clipped4) + (d4 * 2), (float)0.0, (float)1.0);
 
-		const float mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
+		float const mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
 
 		if (mindiff == c4)
 			return clipped4;
@@ -321,24 +321,24 @@ class OpRG09
 public:
 	typedef    ConvSigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float mal1 = std::max(std::max(a1, a8), c);
-		const float mil1 = std::min(std::min(a1, a8), c);
+		float const mal1 = std::max(std::max(a1, a8), c);
+		float const mil1 = std::min(std::min(a1, a8), c);
 
-		const float mal2 = std::max(std::max(a2, a7), c);
-		const float mil2 = std::min(std::min(a2, a7), c);
+		float const mal2 = std::max(std::max(a2, a7), c);
+		float const mil2 = std::min(std::min(a2, a7), c);
 
-		const float mal3 = std::max(std::max(a3, a6), c);
-		const float mil3 = std::min(std::min(a3, a6), c);
+		float const mal3 = std::max(std::max(a3, a6), c);
+		float const mil3 = std::min(std::min(a3, a6), c);
 
-		const float mal4 = std::max(std::max(a4, a5), c);
-		const float mil4 = std::min(std::min(a4, a5), c);
+		float const mal4 = std::max(std::max(a4, a5), c);
+		float const mil4 = std::min(std::min(a4, a5), c);
 
-		const float d1 = mal1 - mil1;
-		const float d2 = mal2 - mil2;
-		const float d3 = mal3 - mil3;
-		const float d4 = mal4 - mil4;
+		float const d1 = mal1 - mil1;
+		float const d2 = mal2 - mil2;
+		float const d3 = mal3 - mil3;
+		float const d4 = mal4 - mil4;
 
-		const float mindiff = std::min(std::min(d1, d2), std::min(d3, d4));
+		float const mindiff = std::min(std::min(d1, d2), std::min(d3, d4));
 
 		if (mindiff == d4)
 			return limit(cr, mil4, mal4);
@@ -361,17 +361,17 @@ class OpRG10
 public:
 	typedef    ConvUnsigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float d1 = std::abs(cr - a1);
-		const float d2 = std::abs(cr - a2);
-		const float d3 = std::abs(cr - a3);
-		const float d4 = std::abs(cr - a4);
-		const float d5 = std::abs(cr - a5);
-		const float d6 = std::abs(cr - a6);
-		const float d7 = std::abs(cr - a7);
-		const float d8 = std::abs(cr - a8);
-		const float dc = std::abs(cr - c);
+		float const d1 = std::abs(cr - a1);
+		float const d2 = std::abs(cr - a2);
+		float const d3 = std::abs(cr - a3);
+		float const d4 = std::abs(cr - a4);
+		float const d5 = std::abs(cr - a5);
+		float const d6 = std::abs(cr - a6);
+		float const d7 = std::abs(cr - a7);
+		float const d8 = std::abs(cr - a8);
+		float const dc = std::abs(cr - c);
 
-		const float mindiff = std::min(std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8))), dc);
+		float const mindiff = std::min(std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8))), dc);
 
 		if (mindiff == d7)
 			return a7;
@@ -407,8 +407,8 @@ public:
 		float                a[8] = { a1, a2, a3, a4, a5, a6, a7, a8 };
 
 		std::sort(&a[0], (&a[0]) + 8);
-		const float        mi = std::min(a[2 - 1], c);
-		const float        ma = std::max(a[7 - 1], c);
+		float const        mi = std::min(a[2 - 1], c);
+		float const        ma = std::max(a[7 - 1], c);
 
 		return (limit(cr, mi, ma));
 	}
@@ -427,8 +427,8 @@ public:
 		float                a[8] = { a1, a2, a3, a4, a5, a6, a7, a8 };
 
 		std::sort(&a[0], (&a[0]) + 8);
-		const float        mi = std::min(a[3 - 1], c);
-		const float        ma = std::max(a[6 - 1], c);
+		float const        mi = std::min(a[3 - 1], c);
+		float const        ma = std::max(a[6 - 1], c);
 
 		return (limit(cr, mi, ma));
 	}
@@ -447,8 +447,8 @@ public:
 		float                a[8] = { a1, a2, a3, a4, a5, a6, a7, a8 };
 
 		std::sort(&a[0], (&a[0]) + 8);
-		const float        mi = std::min(a[4 - 1], c);
-		const float        ma = std::max(a[5 - 1], c);
+		float const        mi = std::min(a[4 - 1], c);
+		float const        ma = std::max(a[5 - 1], c);
 
 		return (limit(cr, mi, ma));
 	}
@@ -465,12 +465,12 @@ public:
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
 		AvsFilterRepair16_SORT_AXIS_CPP
 
-		const float      c1 = std::abs(c - limit(c, mi1, ma1));
-		const float      c2 = std::abs(c - limit(c, mi2, ma2));
-		const float      c3 = std::abs(c - limit(c, mi3, ma3));
-		const float      c4 = std::abs(c - limit(c, mi4, ma4));
+		float const      c1 = std::abs(c - limit(c, mi1, ma1));
+		float const      c2 = std::abs(c - limit(c, mi2, ma2));
+		float const      c3 = std::abs(c - limit(c, mi3, ma3));
+		float const      c4 = std::abs(c - limit(c, mi4, ma4));
 
-		const float      mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
+		float const      mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
 
 		float            mi;
 		float            ma;
@@ -509,17 +509,17 @@ public:
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
 		AvsFilterRepair16_SORT_AXIS_CPP
 
-			const float      d1 = ma1 - mi1;
-		const float      d2 = ma2 - mi2;
-		const float      d3 = ma3 - mi3;
-		const float      d4 = ma4 - mi4;
+			float const      d1 = ma1 - mi1;
+		float const      d2 = ma2 - mi2;
+		float const      d3 = ma3 - mi3;
+		float const      d4 = ma4 - mi4;
 
-		const float      c1 = limit((std::abs(c - limit(c, mi1, ma1)) * 2) + d1, (float)0.0, (float)1.0);
-		const float      c2 = limit((std::abs(c - limit(c, mi2, ma2)) * 2) + d2, (float)0.0, (float)1.0);
-		const float      c3 = limit((std::abs(c - limit(c, mi3, ma3)) * 2) + d3, (float)0.0, (float)1.0);
-		const float      c4 = limit((std::abs(c - limit(c, mi4, ma4)) * 2) + d4, (float)0.0, (float)1.0);
+		float const      c1 = limit((std::abs(c - limit(c, mi1, ma1)) * 2) + d1, (float)0.0, (float)1.0);
+		float const      c2 = limit((std::abs(c - limit(c, mi2, ma2)) * 2) + d2, (float)0.0, (float)1.0);
+		float const      c3 = limit((std::abs(c - limit(c, mi3, ma3)) * 2) + d3, (float)0.0, (float)1.0);
+		float const      c4 = limit((std::abs(c - limit(c, mi4, ma4)) * 2) + d4, (float)0.0, (float)1.0);
 
-		const float      mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
+		float const      mindiff = std::min(std::min(c1, c2), std::min(c3, c4));
 
 		float            mi;
 		float            ma;
@@ -558,11 +558,11 @@ public:
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
 		AvsFilterRepair16_SORT_AXIS_CPP
 
-		const float      l = std::max(std::max(mi1, mi2), std::max(mi3, mi4));
-		const float      u = std::min(std::min(ma1, ma2), std::min(ma3, ma4));
+		float const      l = std::max(std::max(mi1, mi2), std::max(mi3, mi4));
+		float const      u = std::min(std::min(ma1, ma2), std::min(ma3, ma4));
 
-		const float      mi = std::min(std::min(l, u), c);
-		const float      ma = std::max(std::max(l, u), c);
+		float const      mi = std::min(std::min(l, u), c);
+		float const      ma = std::max(std::max(l, u), c);
 
 		return (limit(cr, mi, ma));
 	}
@@ -577,12 +577,12 @@ class OpRG18 {
 public:
 	typedef    ConvSigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float      d1 = std::max(std::abs(c - a1), std::abs(c - a8));
-		const float      d2 = std::max(std::abs(c - a2), std::abs(c - a7));
-		const float      d3 = std::max(std::abs(c - a3), std::abs(c - a6));
-		const float      d4 = std::max(std::abs(c - a4), std::abs(c - a5));
+		float const      d1 = std::max(std::abs(c - a1), std::abs(c - a8));
+		float const      d2 = std::max(std::abs(c - a2), std::abs(c - a7));
+		float const      d3 = std::max(std::abs(c - a3), std::abs(c - a6));
+		float const      d4 = std::max(std::abs(c - a4), std::abs(c - a5));
 
-		const float      mindiff = std::min(std::min(d1, d2), std::min(d3, d4));
+		float const      mindiff = std::min(std::min(d1, d2), std::min(d3, d4));
 
 		float            mi;
 		float            ma;
@@ -619,16 +619,16 @@ class OpRG19 {
 public:
 	typedef    ConvUnsigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float d1 = std::abs(c - a1);
-		const float d2 = std::abs(c - a2);
-		const float d3 = std::abs(c - a3);
-		const float d4 = std::abs(c - a4);
-		const float d5 = std::abs(c - a5);
-		const float d6 = std::abs(c - a6);
-		const float d7 = std::abs(c - a7);
-		const float d8 = std::abs(c - a8);
+		float const d1 = std::abs(c - a1);
+		float const d2 = std::abs(c - a2);
+		float const d3 = std::abs(c - a3);
+		float const d4 = std::abs(c - a4);
+		float const d5 = std::abs(c - a5);
+		float const d6 = std::abs(c - a6);
+		float const d7 = std::abs(c - a7);
+		float const d8 = std::abs(c - a8);
 
-		const float mindiff = std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8)));
+		float const mindiff = std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8)));
 
 		return limit(cr, limit(c - mindiff, (float)0.0, (float)1.0), limit(c + mindiff, (float)0.0, (float)1.0));
 	}
@@ -643,14 +643,14 @@ class OpRG20 {
 public:
 	typedef    ConvUnsigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float d1 = std::abs(c - a1);
-		const float d2 = std::abs(c - a2);
-		const float d3 = std::abs(c - a3);
-		const float d4 = std::abs(c - a4);
-		const float d5 = std::abs(c - a5);
-		const float d6 = std::abs(c - a6);
-		const float d7 = std::abs(c - a7);
-		const float d8 = std::abs(c - a8);
+		float const d1 = std::abs(c - a1);
+		float const d2 = std::abs(c - a2);
+		float const d3 = std::abs(c - a3);
+		float const d4 = std::abs(c - a4);
+		float const d5 = std::abs(c - a5);
+		float const d6 = std::abs(c - a6);
+		float const d7 = std::abs(c - a7);
+		float const d8 = std::abs(c - a8);
 
 		float mindiff = std::min(d1, d2);
 		float maxdiff = std::max(d1, d2);
@@ -687,22 +687,22 @@ public:
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
 		AvsFilterRepair16_SORT_AXIS_CPP
 
-		const float d1 = limit(ma1 - c, (float)0.0, (float)1.0);
-		const float d2 = limit(ma2 - c, (float)0.0, (float)1.0);
-		const float d3 = limit(ma3 - c, (float)0.0, (float)1.0);
-		const float d4 = limit(ma4 - c, (float)0.0, (float)1.0);
+		float const d1 = limit(ma1 - c, (float)0.0, (float)1.0);
+		float const d2 = limit(ma2 - c, (float)0.0, (float)1.0);
+		float const d3 = limit(ma3 - c, (float)0.0, (float)1.0);
+		float const d4 = limit(ma4 - c, (float)0.0, (float)1.0);
 
-		const float rd1 = limit(c - mi1, (float)0.0, (float)1.0);
-		const float rd2 = limit(c - mi2, (float)0.0, (float)1.0);
-		const float rd3 = limit(c - mi3, (float)0.0, (float)1.0);
-		const float rd4 = limit(c - mi4, (float)0.0, (float)1.0);
+		float const rd1 = limit(c - mi1, (float)0.0, (float)1.0);
+		float const rd2 = limit(c - mi2, (float)0.0, (float)1.0);
+		float const rd3 = limit(c - mi3, (float)0.0, (float)1.0);
+		float const rd4 = limit(c - mi4, (float)0.0, (float)1.0);
 
-		const float u1 = std::max(d1, rd1);
-		const float u2 = std::max(d2, rd2);
-		const float u3 = std::max(d3, rd3);
-		const float u4 = std::max(d4, rd4);
+		float const u1 = std::max(d1, rd1);
+		float const u2 = std::max(d2, rd2);
+		float const u3 = std::max(d3, rd3);
+		float const u4 = std::max(d4, rd4);
 
-		const float u = std::min(std::min(u1, u2), std::min(u3, u4));
+		float const u = std::min(std::min(u1, u2), std::min(u3, u4));
 
 		return limit(cr, limit(c - u, (float)0.0, (float)1.0), limit(c + u, (float)0.0, (float)1.0));
 	}
@@ -717,16 +717,16 @@ class OpRG22 {
 public:
 	typedef    ConvUnsigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float d1 = std::abs(cr - a1);
-		const float d2 = std::abs(cr - a2);
-		const float d3 = std::abs(cr - a3);
-		const float d4 = std::abs(cr - a4);
-		const float d5 = std::abs(cr - a5);
-		const float d6 = std::abs(cr - a6);
-		const float d7 = std::abs(cr - a7);
-		const float d8 = std::abs(cr - a8);
+		float const d1 = std::abs(cr - a1);
+		float const d2 = std::abs(cr - a2);
+		float const d3 = std::abs(cr - a3);
+		float const d4 = std::abs(cr - a4);
+		float const d5 = std::abs(cr - a5);
+		float const d6 = std::abs(cr - a6);
+		float const d7 = std::abs(cr - a7);
+		float const d8 = std::abs(cr - a8);
 
-		const float mindiff = std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8)));
+		float const mindiff = std::min(std::min(std::min(d1, d2), std::min(d3, d4)), std::min(std::min(d5, d6), std::min(d7, d8)));
 
 		return limit(c, limit(cr - mindiff, (float)0.0, (float)1.0), limit(cr + mindiff, (float)0.0, (float)1.0));
 	}
@@ -741,14 +741,14 @@ class OpRG23 {
 public:
 	typedef    ConvUnsigned    ConvSign;
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
-		const float d1 = std::abs(cr - a1);
-		const float d2 = std::abs(cr - a2);
-		const float d3 = std::abs(cr - a3);
-		const float d4 = std::abs(cr - a4);
-		const float d5 = std::abs(cr - a5);
-		const float d6 = std::abs(cr - a6);
-		const float d7 = std::abs(cr - a7);
-		const float d8 = std::abs(cr - a8);
+		float const d1 = std::abs(cr - a1);
+		float const d2 = std::abs(cr - a2);
+		float const d3 = std::abs(cr - a3);
+		float const d4 = std::abs(cr - a4);
+		float const d5 = std::abs(cr - a5);
+		float const d6 = std::abs(cr - a6);
+		float const d7 = std::abs(cr - a7);
+		float const d8 = std::abs(cr - a8);
 
 		float mindiff = std::min(d1, d2);
 		float maxdiff = std::max(d1, d2);
@@ -785,22 +785,22 @@ public:
 	static __forceinline float rg(float cr, float a1, float a2, float a3, float a4, float c, float a5, float a6, float a7, float a8) {
 		AvsFilterRepair16_SORT_AXIS_CPP
 
-		const float d1 = limit(ma1 - cr, (float)0.0, (float)1.0);
-		const float d2 = limit(ma2 - cr, (float)0.0, (float)1.0);
-		const float d3 = limit(ma3 - cr, (float)0.0, (float)1.0);
-		const float d4 = limit(ma4 - cr, (float)0.0, (float)1.0);
+		float const d1 = limit(ma1 - cr, (float)0.0, (float)1.0);
+		float const d2 = limit(ma2 - cr, (float)0.0, (float)1.0);
+		float const d3 = limit(ma3 - cr, (float)0.0, (float)1.0);
+		float const d4 = limit(ma4 - cr, (float)0.0, (float)1.0);
 
-		const float rd1 = limit(cr - mi1, (float)0.0, (float)1.0);
-		const float rd2 = limit(cr - mi2, (float)0.0, (float)1.0);
-		const float rd3 = limit(cr - mi3, (float)0.0, (float)1.0);
-		const float rd4 = limit(cr - mi4, (float)0.0, (float)1.0);
+		float const rd1 = limit(cr - mi1, (float)0.0, (float)1.0);
+		float const rd2 = limit(cr - mi2, (float)0.0, (float)1.0);
+		float const rd3 = limit(cr - mi3, (float)0.0, (float)1.0);
+		float const rd4 = limit(cr - mi4, (float)0.0, (float)1.0);
 
-		const float u1 = std::max(d1, rd1);
-		const float u2 = std::max(d2, rd2);
-		const float u3 = std::max(d3, rd3);
-		const float u4 = std::max(d4, rd4);
+		float const u1 = std::max(d1, rd1);
+		float const u2 = std::max(d2, rd2);
+		float const u3 = std::max(d3, rd3);
+		float const u4 = std::max(d4, rd4);
 
-		const float u = std::min(std::min(u1, u2), std::min(u3, u4));
+		float const u = std::min(std::min(u1, u2), std::min(u3, u4));
 
 		return limit(c, limit(cr - u, (float)0.0, (float)1.0), limit(cr + u, (float)0.0, (float)1.0));
 	}
@@ -836,16 +836,16 @@ template <class OP, class T>
 class PlaneProc {
 public:
 
-static void process_subplane_cpp (const T *src1_ptr, const T *src2_ptr, T *dst_ptr, int stride, int width, int height)
+static void process_subplane_cpp (const T *src1_ptr, T const *src2_ptr, T *dst_ptr, int stride, int width, int height)
 {
-    const int        y_b = 1;
-    const int        y_e = height - 1;
+    int const        y_b = 1;
+    int const        y_e = height - 1;
 
     dst_ptr += y_b * stride;
     src1_ptr += y_b * stride;
     src2_ptr += y_b * stride;
 
-    const int        x_e = width - 1;
+    int const        x_e = width - 1;
 
     for (int y = y_b; y < y_e; ++y)
     {
@@ -868,11 +868,11 @@ static void process_subplane_cpp (const T *src1_ptr, const T *src2_ptr, T *dst_p
     }
 }
 
-static void process_row_cpp (T *dst_ptr, const T *src1_ptr, const T *src2_ptr, int stride_src, int x_beg, int x_end)
+static void process_row_cpp (T *dst_ptr, T const *src1_ptr, T const *src2_ptr, int stride_src, int x_beg, int x_end)
 {
-    const int      om = stride_src - 1;
-    const int      o0 = stride_src    ;
-    const int      op = stride_src + 1;
+    int const      om = stride_src - 1;
+    int const      o0 = stride_src    ;
+    int const      op = stride_src + 1;
 
     src1_ptr += x_beg;
     src2_ptr += x_beg;
@@ -901,18 +901,18 @@ static void process_row_cpp (T *dst_ptr, const T *src1_ptr, const T *src2_ptr, i
     }
     for (; x < x_end; ++x)
     {
-        const float        cr = src1_ptr [0];
-        const float        a1 = src2_ptr [-op];
-        const float        a2 = src2_ptr [-o0];
-        const float        a3 = src2_ptr [-om];
-        const float        a4 = src2_ptr [-1 ];
-        const float        c  = src2_ptr [ 0 ];
-        const float        a5 = src2_ptr [ 1 ];
-        const float        a6 = src2_ptr [ om];
-        const float        a7 = src2_ptr [ o0];
-        const float        a8 = src2_ptr [ op];
+        float const        cr = src1_ptr [0];
+        float const        a1 = src2_ptr [-op];
+        float const        a2 = src2_ptr [-o0];
+        float const        a3 = src2_ptr [-om];
+        float const        a4 = src2_ptr [-1 ];
+        float const        c  = src2_ptr [ 0 ];
+        float const        a5 = src2_ptr [ 1 ];
+        float const        a6 = src2_ptr [ om];
+        float const        a7 = src2_ptr [ o0];
+        float const        a8 = src2_ptr [ op];
 
-        const float        res = OP::rg (cr, a1, a2, a3, a4, c, a5, a6, a7, a8);
+        float const        res = OP::rg (cr, a1, a2, a3, a4, c, a5, a6, a7, a8);
 
         dst_ptr [x] = res;
 
@@ -922,15 +922,15 @@ static void process_row_cpp (T *dst_ptr, const T *src1_ptr, const T *src2_ptr, i
 }
 
 template <class OP1, class T1>
-static void do_process_plane_cpp (const VSFrameRef *src1_frame, const VSFrameRef *src2_frame, VSFrameRef *dst_frame, int plane_id, const VSAPI *vsapi)
+static void do_process_plane_cpp (VSFrameRef const *src1_frame, VSFrameRef const *src2_frame, VSFrameRef *dst_frame, int plane_id, VSAPI const *vsapi)
 {
-    const int        w             = vsapi->getFrameWidth(src1_frame, plane_id);
-    const int        h             = vsapi->getFrameHeight(src1_frame, plane_id);
+    int const        w             = vsapi->getFrameWidth(src1_frame, plane_id);
+    int const        h             = vsapi->getFrameHeight(src1_frame, plane_id);
     T1 *            dst_ptr       = reinterpret_cast<T1*>(vsapi->getWritePtr(dst_frame, plane_id));
-    const int        stride        = vsapi->getStride(src1_frame, plane_id);
+    int const        stride        = vsapi->getStride(src1_frame, plane_id);
 
-    const T1*        src1_ptr       = reinterpret_cast<const T1*>(vsapi->getReadPtr(src1_frame, plane_id));
-    const T1*        src2_ptr       = reinterpret_cast<const T1*>(vsapi->getReadPtr(src2_frame, plane_id));
+    T1 const*        src1_ptr       = reinterpret_cast<T1 const*>(vsapi->getReadPtr(src1_frame, plane_id));
+    T1 const*        src2_ptr       = reinterpret_cast<T1 const*>(vsapi->getReadPtr(src2_frame, plane_id));
 
     // First line
     memcpy (dst_ptr, src1_ptr, stride);
@@ -939,7 +939,7 @@ static void do_process_plane_cpp (const VSFrameRef *src1_frame, const VSFrameRef
     PlaneProc<OP1, T1>::process_subplane_cpp(src1_ptr, src2_ptr, dst_ptr, stride/sizeof(T1), w, h);
 
     // Last line
-    const int        lp = (h - 1) * stride/sizeof(T1);
+    int const        lp = (h - 1) * stride/sizeof(T1);
     memcpy (dst_ptr + lp, src1_ptr + lp, stride);
 }
 
@@ -948,26 +948,26 @@ static void do_process_plane_cpp (const VSFrameRef *src1_frame, const VSFrameRef
 typedef struct {
     VSNodeRef *node1;
     VSNodeRef *node2;
-    const VSVideoInfo *vi;
+    VSVideoInfo const *vi;
     int mode[3];
 } RepairData;
 
-static void VS_CC repairInit(VSMap *in, VSMap *out, void **instanceData, VSNode *node, VSCore *core, const VSAPI *vsapi) {
+static void VS_CC repairInit(VSMap *in, VSMap *out, void **instanceData, VSNode *node, VSCore *core, VSAPI const *vsapi) {
     RepairData *d = static_cast<RepairData *>(*instanceData);
     vsapi->setVideoInfo(d->vi, 1, node);
 }
 
-static const VSFrameRef *VS_CC repairGetFrame(int n, int activationReason, void **instanceData, void **frameData, VSFrameContext *frameCtx, VSCore *core, const VSAPI *vsapi) {
+static VSFrameRef const *VS_CC repairGetFrame(int n, int activationReason, void **instanceData, void **frameData, VSFrameContext *frameCtx, VSCore *core, VSAPI const *vsapi) {
     RepairData *d = static_cast<RepairData *>(*instanceData);
 
     if (activationReason == arInitial) {
         vsapi->requestFrameFilter(n, d->node1, frameCtx);
         vsapi->requestFrameFilter(n, d->node2, frameCtx);
     } else if (activationReason == arAllFramesReady) {
-        const VSFrameRef *src1_frame = vsapi->getFrameFilter(n, d->node1, frameCtx);
-        const VSFrameRef *src2_frame = vsapi->getFrameFilter(n, d->node2, frameCtx);
+        VSFrameRef const *src1_frame = vsapi->getFrameFilter(n, d->node1, frameCtx);
+        VSFrameRef const *src2_frame = vsapi->getFrameFilter(n, d->node2, frameCtx);
         int planes[3] = {0, 1, 2};
-        const VSFrameRef * cp_planes[3] = { d->mode[0] ? nullptr : src1_frame, d->mode[1] ? nullptr : src1_frame, d->mode[2] ? nullptr : src1_frame };
+        VSFrameRef const * cp_planes[3] = { d->mode[0] ? nullptr : src1_frame, d->mode[1] ? nullptr : src1_frame, d->mode[2] ? nullptr : src1_frame };
         VSFrameRef *dst_frame = vsapi->newVideoFrame2(vsapi->getFrameFormat(src1_frame), vsapi->getFrameWidth(src1_frame, 0), vsapi->getFrameHeight(src1_frame, 0), cp_planes, planes, src1_frame, core);
 
 
@@ -1012,14 +1012,14 @@ static const VSFrameRef *VS_CC repairGetFrame(int n, int activationReason, void 
     return nullptr;
 }
 
-static void VS_CC repairFree(void *instanceData, VSCore *core, const VSAPI *vsapi) {
+static void VS_CC repairFree(void *instanceData, VSCore *core, VSAPI const *vsapi) {
     RepairData *d = static_cast<RepairData *>(instanceData);
     vsapi->freeNode(d->node1);
     vsapi->freeNode(d->node2);
     delete d;
 }
 
-void VS_CC repairCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, const VSAPI *vsapi) {
+void VS_CC repairCreate(VSMap const *in, VSMap *out, void *userData, VSCore *core, VSAPI const *vsapi) {
     RepairData d;
 
     d.node1 = vsapi->propGetNode(in, "clip", 0, nullptr);
