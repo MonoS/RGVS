@@ -24,6 +24,16 @@ class ConvUnsigned
 {
 };
 
+inline static __m256
+_mm256_abs_ps(__m256 x)
+{
+    static __m256 Mask = _mm256_castsi256_ps(_mm256_set1_epi32(~0x80000000));
+
+    __m256 abs = _mm256_and_ps(Mask, x);
+
+    return abs;
+}
+
 #define AvsFilterRepair16_SORT_AXIS_CPP \
     float const      ma1 = std::max(a1, a8);   \
     float const      mi1 = std::min(a1, a8);   \
