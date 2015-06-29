@@ -581,8 +581,15 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
-	    return a;
+	    AvsFilterRepair16_SORT_AXIS_AVX
+
+		__m256 const      l = _mm256_max_ps(_mm256_max_ps(mi1, mi2), _mm256_max_ps(mi3, mi4));
+		__m256 const      u = _mm256_min_ps(_mm256_min_ps(ma1, ma2), _mm256_min_ps(ma3, ma4));
+
+		__m256 const      mi = _mm256_min_ps(_mm256_min_ps(l, u), c);
+		__m256 const      ma = _mm256_max_ps(_mm256_max_ps(l, u), c);
+
+		return clamp_8(cr, mi, ma);
 	}
 };
 
