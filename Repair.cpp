@@ -647,8 +647,18 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
-	    return a;
+	    __m256 const d1 = _mm256_abs_ps(_mm256_sub_ps(cr, a1));
+		__m256 const d2 = _mm256_abs_ps(_mm256_sub_ps(cr, a2));
+		__m256 const d3 = _mm256_abs_ps(_mm256_sub_ps(cr, a3));
+		__m256 const d4 = _mm256_abs_ps(_mm256_sub_ps(cr, a4));
+		__m256 const d5 = _mm256_abs_ps(_mm256_sub_ps(cr, a5));
+		__m256 const d6 = _mm256_abs_ps(_mm256_sub_ps(cr, a6));
+		__m256 const d7 = _mm256_abs_ps(_mm256_sub_ps(cr, a7));
+		__m256 const d8 = _mm256_abs_ps(_mm256_sub_ps(cr, a8));
+
+		__m256 const mindiff = _mm256_min_ps(_mm256_min_ps(_mm256_min_ps(d1, d2), _mm256_min_ps(d3, d4)), _mm256_min_ps(_mm256_min_ps(d5, d6), _mm256_min_ps(d7, d8)));
+
+		return clamp_8(cr, clamp_8(_mm256_sub_ps(cr, mindiff), Zero, One), clamp_8(_mm256_add_ps(c, mindiff), Zero, One));
 	}
 };
 
