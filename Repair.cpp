@@ -34,6 +34,9 @@ _mm256_abs_ps(__m256 x)
     return abs;
 }
 
+static __m256 const Zero = _mm256_set1_ps(0.0f);
+static __m256 const One = _mm256_set1_ps(1.0f);
+
 #define AvsFilterRepair16_SORT_AXIS_CPP \
     float const      ma1 = std::max(a1, a8);   \
     float const      mi1 = std::min(a1, a8);   \
@@ -720,9 +723,6 @@ public:
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
 	    AvsFilterRepair16_SORT_AXIS_AVX
 
-        static __m256 Zero = _mm256_set1_ps(0.0f);
-        static __m256 One = _mm256_set1_ps(1.0f);
-
 	    __m256 const d1 = clamp_8(_mm256_sub_ps(ma1, c), Zero, One);
 		__m256 const d2 = clamp_8(_mm256_sub_ps(ma2, c), Zero, One);
 		__m256 const d3 = clamp_8(_mm256_sub_ps(ma3, c), Zero, One);
@@ -763,8 +763,6 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    static __m256 Zero = _mm256_set1_ps(0.0f);
-        static __m256 One = _mm256_set1_ps(1.0f);
 
 	    __m256 const d1 = _mm256_abs_ps(_mm256_sub_ps(cr, a1));
 		__m256 const d2 = _mm256_abs_ps(_mm256_sub_ps(cr, a2));
@@ -818,9 +816,6 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-
-	    static __m256 Zero = _mm256_set1_ps(0.0f);
-        static __m256 One = _mm256_set1_ps(1.0f);
 
 	    __m256 const d1 = _mm256_abs_ps(_mm256_sub_ps(cr, a1));
 		__m256 const d2 = _mm256_abs_ps(_mm256_sub_ps(cr, a2));
@@ -884,9 +879,6 @@ public:
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
 		AvsFilterRepair16_SORT_AXIS_AVX
-
-        static __m256 Zero = _mm256_set1_ps(0.0f);
-        static __m256 One = _mm256_set1_ps(1.0f);
 
 		__m256 const d1 = clamp_8(_mm256_sub_ps(ma1, cr), Zero, One);
 		__m256 const d2 = clamp_8(_mm256_sub_ps(ma2, cr), Zero, One);
