@@ -101,7 +101,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(0.0f);
 	    return a;
 	}
 };
@@ -119,7 +119,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -137,7 +137,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -182,7 +182,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -232,7 +232,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -282,7 +282,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -332,7 +332,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -372,7 +372,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -415,7 +415,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -435,7 +435,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -455,7 +455,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -475,7 +475,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -519,7 +519,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -568,7 +568,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
@@ -638,7 +638,7 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
+	    __m256 a = _mm256_set1_ps(1.0f);
 	    return a;
 	}
 };
