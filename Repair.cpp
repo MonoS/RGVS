@@ -689,8 +689,36 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
-	    return a;
+	    __m256 const d1 = _mm256_abs_ps(_mm256_sub_ps(c, a1));
+		__m256 const d2 = _mm256_abs_ps(_mm256_sub_ps(c, a2));
+		__m256 const d3 = _mm256_abs_ps(_mm256_sub_ps(c, a3));
+		__m256 const d4 = _mm256_abs_ps(_mm256_sub_ps(c, a4));
+		__m256 const d5 = _mm256_abs_ps(_mm256_sub_ps(c, a5));
+		__m256 const d6 = _mm256_abs_ps(_mm256_sub_ps(c, a6));
+		__m256 const d7 = _mm256_abs_ps(_mm256_sub_ps(c, a7));
+		__m256 const d8 = _mm256_abs_ps(_mm256_sub_ps(c, a8));
+
+		__m256 mindiff = _mm256_min_ps(d1, d2);
+		__m256 maxdiff = _mm256_max_ps(d1, d2);
+
+		maxdiff = clamp_8(maxdiff, mindiff, d3);
+		mindiff = _mm256_min_ps(mindiff, d3);
+
+		maxdiff = clamp_8(maxdiff, mindiff, d4);
+		mindiff = _mm256_min_ps(mindiff, d4);
+
+		maxdiff = clamp_8(maxdiff, mindiff, d5);
+		mindiff = _mm256_min_ps(mindiff, d5);
+
+		maxdiff = clamp_8(maxdiff, mindiff, d6);
+		mindiff = _mm256_min_ps(mindiff, d6);
+
+		maxdiff = clamp_8(maxdiff, mindiff, d7);
+		mindiff = _mm256_min_ps(mindiff, d7);
+
+		maxdiff = clamp_8(maxdiff, mindiff, d8);
+
+		return clamp_8(cr, clamp_8(_mm256_sub_ps(c, maxdiff), Zero, One), clamp_8(_mm256_add_ps(c, maxdiff), Zero, One));
 	}
 };
 
