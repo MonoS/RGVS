@@ -718,8 +718,29 @@ public:
 	}
 
 	static __forceinline __m256 rg_8(__m256 cr, __m256 a1, __m256 a2, __m256 a3, __m256 a4, __m256 c, __m256 a5, __m256 a6, __m256 a7, __m256 a8) {
-	    __m256 a;
-	    return a;
+	    AvsFilterRepair16_SORT_AXIS_AVX
+
+        static __m256 Zero = _mm256_set1_ps(0.0f);
+        static __m256 One = _mm256_set1_ps(1.0f);
+
+	    __m256 const d1 = clamp_8(_mm256_sub_ps(ma1, c), Zero, One);
+		__m256 const d2 = clamp_8(_mm256_sub_ps(ma2, c), Zero, One);
+		__m256 const d3 = clamp_8(_mm256_sub_ps(ma3, c), Zero, One);
+		__m256 const d4 = clamp_8(_mm256_sub_ps(ma4, c), Zero, One);
+
+		__m256 const rd1 = clamp_8(_mm256_sub_ps(c, mi1), Zero, One);
+		__m256 const rd2 = clamp_8(_mm256_sub_ps(c, mi2), Zero, One);
+		__m256 const rd3 = clamp_8(_mm256_sub_ps(c, mi3), Zero, One);
+		__m256 const rd4 = clamp_8(_mm256_sub_ps(c, mi4), Zero, One);
+
+		__m256 const u1 = _mm256_max_ps(d1, rd1);
+		__m256 const u2 = _mm256_max_ps(d2, rd2);
+		__m256 const u3 = _mm256_max_ps(d3, rd3);
+		__m256 const u4 = _mm256_max_ps(d4, rd4);
+
+		__m256 const u = _mm256_min_ps(_mm256_min_ps(u1, u2), _mm256_min_ps(u3, u4));
+
+		return clamp_8(cr, clamp_8(_mm256_sub_ps(c, u), Zero, One), clamp_8(_mm256_add_ps(c, u), Zero, One));
 	}
 };
 
